@@ -41,8 +41,8 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-.gradle
+build.gradle
 gralew
-.bat
+gralew.bat
 settings.gradle
 .jar
