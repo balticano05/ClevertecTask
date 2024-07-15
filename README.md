@@ -32,7 +32,7 @@ git clone https://github.com/balticano05/Check.git
 **3)** Создайте папку для скомпилированных классов (если еще не создана):
 ``` mkdir project ```
 
-**4)** Скомпилируйте все .java файлы с относительными путями: ```javac -d project -sourcepath src\main\java\ru\clevertec\check\*.java```
+**4)** Скомпилируйте все .java файлы с относительными путями: ```javac -d project -sourcepath src\main\java src\main\java\ru\clevertec\check\*.java```
 
 **5)** После компиляции выполните команду: ```java -cp project ru.clevertec.check.CheckRunner id-quantity discountCard=xxxx balanceDebitCard=xxxx```
 
