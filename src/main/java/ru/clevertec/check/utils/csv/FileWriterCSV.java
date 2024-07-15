@@ -11,9 +11,9 @@ import java.nio.file.Paths;
 public final class FileWriterCSV {
 
 
-    public static void writeInFile(ResponseResultDTO responseResult) throws IOException {
+    public static void writeInFile(ResponseResultDTO responseResult, String saveToFile) throws IOException {
 
-        String filePath = "result.csv";
+        String filePath = saveToFile;
 
         if (Files.notExists(Paths.get(filePath))) {
 

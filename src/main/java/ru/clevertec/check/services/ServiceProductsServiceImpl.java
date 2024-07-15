@@ -13,10 +13,10 @@ public class ServiceProductsServiceImpl implements ProductsService {
     public List<ProductOrder> productOrderList = new ArrayList<>();
 
     @Override
-    public void takeOrders(List<String> pairs) throws IOException {
+    public void takeOrders(List<String> pairs, String pathToFile) throws IOException {
 
         ProductsRep productsRep = new ProductsRep();
-        productsRep.createRep();
+        productsRep.createRep(pathToFile);
 
         this.productOrderList = productsRep.getAllProductsById(pairs);
     }

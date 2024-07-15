@@ -14,9 +14,9 @@ public class ProductsRep extends AbstractRepository<Product> {
     public ProductsRep() {
     }
 
-    public void createRep() throws IOException {
+    public void createRep(String pathToFile) throws IOException {
 
-        super.createRep("src/main/resources/products.csv", "PRODUCT");
+        super.createRep(pathToFile, "PRODUCT");
     }
 
     public List<ProductOrder> getAllProductsById(List<String> pairs) {

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ProductsService {
 
-    public void takeOrders(List<String> pairs) throws IOException;
+    public void takeOrders(List<String> pairs,String pathToFile) throws IOException;
 
     public ProductOrders executeOrders();
 
