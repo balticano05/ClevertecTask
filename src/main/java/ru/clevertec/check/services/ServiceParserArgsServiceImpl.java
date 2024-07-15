@@ -17,12 +17,15 @@ public class ServiceParserArgsServiceImpl implements ParserArgsService {
         responseParsedArgs.setPairs(parsePairs(args));
         responseParsedArgs.setNumberDiscountCard(parseDiscountCard(args));
         responseParsedArgs.setBalance(parseBalance(args));
+        responseParsedArgs.setPathToFile(parsePathToFile(args));
+        responseParsedArgs.setSaveToFile(parseSaveToFile(args));
 
         return responseParsedArgs;
 
     }
 
     private List<String> parsePairs(String args) {
+
         List<String> pairs = new ArrayList<>();
 
         Matcher idQuantityMatcher = PatternConst.REGEX_PAIR.matcher(args);
@@ -48,6 +51,7 @@ public class ServiceParserArgsServiceImpl implements ParserArgsService {
     }
 
     private Double parseBalance(String args) {
+
         Double balance = 0.0;
 
         Matcher balanceDebitCardMatcher = PatternConst.REGEX_BALANCE.matcher(args);
@@ -56,6 +60,30 @@ public class ServiceParserArgsServiceImpl implements ParserArgsService {
         }
 
         return balance;
+    }
+
+    private String parsePathToFile(String args) {
+
+        String pathToFile = "none";
+
+        Matcher pathToFileMatcher = PatternConst.REGEX_PATH_TO_FILE.matcher(args);
+        if(pathToFileMatcher.find()) {
+            pathToFile = pathToFileMatcher.group(1);
+        }
+
+        return pathToFile;
+    }
+
+    private String parseSaveToFile(String args) {
+
+        String saveToFile = "none";
+
+        Matcher saveToFileMatcher = PatternConst.REGEX_SAVE_TO_FILE.matcher(args);
+        if(saveToFileMatcher.find()) {
+            saveToFile = saveToFileMatcher.group(1);
+        }
+
+        return saveToFile;
     }
 
 }

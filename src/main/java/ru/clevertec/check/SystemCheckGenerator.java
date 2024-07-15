@@ -38,6 +38,8 @@ public class SystemCheckGenerator {
 
                 ResponseParsedArgsDTO responseParsedArgs = parseArguments(args);
 
+                System.out.println(responseParsedArgs.getPathToFile()+"\n"+responseParsedArgs.getSaveToFile());
+
                 ProductOrders productOrders = processProducts(responseParsedArgs);
                 printProducts(productOrders);
 
