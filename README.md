@@ -38,7 +38,7 @@ git clone https://github.com/balticano05/Check.git
 balanceDebitCard=xxxx pathToFile=XXXX saveToFile=xxxx ```
 
 **Пример:** ```java -cp project ru.clevertec.check.CheckRunner 3-1 2-5 5-1 discountCard=1111
-balanceDebitCard=100```
+balanceDebitCard=100 pathToFile=./src/main/resources/products.csv saveToFile=./result.csv```
 
 После выполнения команды в корне проекта будет создан файл result.csv, содержащий сгенерированный чек. Результат выполнения генерации также будет продублирован в консоль.
 
