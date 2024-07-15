@@ -24,14 +24,12 @@ public class SystemCheckGenerator {
     private final ServiceParserArgsServiceImpl serviceParserArgs;
     private final ServiceProductsServiceImpl serviceProducts;
     private final ServiceDiscountCardServiceImpl serviceDiscountCard;
-    private final FileWriterCSV fileWriterCSV;
 
     public SystemCheckGenerator() {
         this.serviceGeneratingCheck = new ServiceGeneratingCheckImpl();
         this.serviceParserArgs = new ServiceParserArgsServiceImpl();
         this.serviceProducts = new ServiceProductsServiceImpl();
         this.serviceDiscountCard = new ServiceDiscountCardServiceImpl();
-        this.fileWriterCSV = new FileWriterCSV();
     }
 
     public void generate(String args) {
