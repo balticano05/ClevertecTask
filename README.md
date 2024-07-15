@@ -45,15 +45,18 @@ balanceDebitCard=100```
 
 ```
 Date;Time
-15.02.2024;16:57:05
+5.07.2024;22:51:10
 
 QTY;DESCRIPTION;PRICE;DISCOUNT;TOTAL
-1;Yogurt 400g;2,1$;0,06$;2,1$
+1;Yogurt 400g;2,1$;0,1$;2,1$
 5;Cream 400g;2,71$;1,35$;13,55$
-1;Packed cabbage 1kg;1,19$;0,04$;1,19$
+1;Packed cabbage 1kg;1,19$;0,06$;1,19$
 
 DISCOUNT CARD;DISCOUNT PERCENTAGE
-1411;3% 
+4444;5%
+
+TOTAL PRICE;TOTAL DISCOUNT;TOTAL WITH DISCOUNT
+16,84$;1,52$;15,32$
 ```
 В противном случае результаты выполнения:
 ```
