@@ -23,7 +23,7 @@ Java 21.
 **1)** Выкачайте репозиторий
 
 ```
-git clone https://github.com/balticano05/Check.git
+git clone https://github.com/balticano05/ClevertecTask.git
 ```
 
 **2)** Перейдите в кореневую папку проекта через cmd:
