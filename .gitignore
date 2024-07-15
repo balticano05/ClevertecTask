@@ -40,3 +40,9 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+.gradle
+gralew
+.bat
+settings.gradle
+.jar

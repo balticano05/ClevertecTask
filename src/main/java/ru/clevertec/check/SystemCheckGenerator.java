@@ -115,12 +115,12 @@ public class SystemCheckGenerator {
 
             printChek(converter.getConvertedEntity());
 
-            fileWriterCSV.writeInFile(responseResultDTO);
+            FileWriterCSV.writeInFile(responseResultDTO);
         } else {
 
             responseResultDTO = new ResponseResultDTO(List.of("ERROR", "NOT ENOUGH MONEY"));
 
-            fileWriterCSV.writeInFile(responseResultDTO);
+            FileWriterCSV.writeInFile(responseResultDTO);
             System.out.println("BAD REQUEST.");
         }
     }
@@ -129,7 +129,7 @@ public class SystemCheckGenerator {
 
         ResponseResultDTO responseResultDTO = new ResponseResultDTO(List.of("ERROR", message));
 
-        fileWriterCSV.writeInFile(responseResultDTO);
+        FileWriterCSV.writeInFile(responseResultDTO);
 
         System.out.println("BAD REQUEST.");
     }

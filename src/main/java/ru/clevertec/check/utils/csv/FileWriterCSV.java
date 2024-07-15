@@ -10,8 +10,6 @@ import java.nio.file.Paths;
 
 public final class FileWriterCSV {
 
-    public FileWriterCSV() {
-    }
 
     public static void writeInFile(ResponseResultDTO responseResult) throws IOException {
 

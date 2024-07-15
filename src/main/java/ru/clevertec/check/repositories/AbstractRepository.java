@@ -27,7 +27,6 @@ public abstract class AbstractRepository<T> {
     }
 
     protected List<String> getDataFromFile(String filePath) throws IOException {
-
         return FileReaderCSV.readFile(filePath);
     }
 
