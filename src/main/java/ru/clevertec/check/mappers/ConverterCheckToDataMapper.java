@@ -39,18 +39,18 @@ public class ConverterCheckToDataMapper implements EntityMapper<Check> {
 
     private String formatDate(Date date) {
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy;HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat(StringConst.FORMAT_DATE_TIME);
         return dateFormat.format(date);
 
     }
 
     private void addProductsInfo(Check check) {
 
-        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        DecimalFormat decimalFormat = new DecimalFormat(StringConst.FORMAT_DOUBLE_VALUES);
 
         for (ProductsPriceDiscountInfo product : check.getProducts()) {
 
-            data.add(String.format("%s;%s;%s$;%s$;%s$",
+            data.add(String.format(StringConst.FORMAT_INFO_ABOUT_PRODUCTS_IN_CHECK,
                     product.getQuantity(),
                     product.getDescription(),
                     decimalFormat.format(product.getPrice()),
@@ -61,17 +61,17 @@ public class ConverterCheckToDataMapper implements EntityMapper<Check> {
 
     private void addDiscountCardInfo(Check check) {
 
-        if (!check.getDiscountCardNumber().equals("none")) {
+        if (!check.getDiscountCardNumber().equals(StringConst.NONE)) {
 
             data.add("\n" + StringConst.DATA_CARD_DISCOUNT_PERCENTAGE);
-            data.add(String.format("%s;%s%%", check.getDiscountCardNumber(), formatDecimal(check.getDiscount())));
+            data.add(String.format(StringConst.FORMAT_CARD_DISCOUNT, check.getDiscountCardNumber(), formatDecimal(check.getDiscount())));
         }
     }
 
     private void addCheckPriceInfo(Check check) {
 
         data.add("\n" + StringConst.DATA_CHECK_PRICE);
-        data.add(String.format("%s$;%s$;%s$",
+        data.add(String.format(StringConst.FORMAT_CHECK_PRICE,
                 formatDecimal(check.getTotalPrice()),
                 formatDecimal(check.getTotalDiscount()),
                 formatDecimal(check.getTotalWithDiscount())));
@@ -79,7 +79,7 @@ public class ConverterCheckToDataMapper implements EntityMapper<Check> {
 
     private String formatDecimal(double value) {
 
-        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        DecimalFormat decimalFormat = new DecimalFormat(StringConst.FORMAT_DOUBLE_VALUES);
 
         return decimalFormat.format(value);
     }

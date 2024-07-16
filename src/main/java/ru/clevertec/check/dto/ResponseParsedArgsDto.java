@@ -1,17 +1,19 @@
 package ru.clevertec.check.dto;
 
+import ru.clevertec.check.utils.systemconsts.StringConst;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResponseParsedArgsDTO {
+public class ResponseParsedArgsDto {
 
     private List<String> pairs = new ArrayList<>();
     private String numberDiscountCard = "none";
     private Double balance = 0.0;
-    private String pathToFile = "none";
-    private String saveToFile = "none";
+    private String pathToFile = StringConst.NONE;
+    private String saveToFile = StringConst.NONE;
 
-    public ResponseParsedArgsDTO() {
+    public ResponseParsedArgsDto() {
     }
 
     public List<String> getPairs() {
@@ -56,7 +58,7 @@ public class ResponseParsedArgsDTO {
 
     @Override
     public String toString() {
-        return "ResponseParsedArgsDTO{" +
+        return "ResponseParsedArgsDto{" +
                 "pairs=" + pairs +
                 ", numberDiscountCard='" + numberDiscountCard + '\'' +
                 ", balance=" + balance +

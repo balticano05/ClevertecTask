@@ -15,12 +15,6 @@ public class DiscountCard {
         this.discount = discount;
     }
 
-    private DiscountCard(DiscountCardBuilder builder) {
-        this.id = builder.id;
-        this.cardNumber = builder.cardNumber;
-        this.discount = builder.discount;
-    }
-
     public int getId() {
         return id;
     }
@@ -32,6 +26,13 @@ public class DiscountCard {
     public int getDiscount() {
         return discount;
     }
+
+    private DiscountCard(DiscountCardBuilder builder) {
+        this.id = builder.id;
+        this.cardNumber = builder.cardNumber;
+        this.discount = builder.discount;
+    }
+
 
     public static class DiscountCardBuilder {
         private int id = -1;

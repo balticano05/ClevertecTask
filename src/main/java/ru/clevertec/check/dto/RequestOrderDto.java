@@ -4,16 +4,16 @@ import ru.clevertec.check.entity.debit.DebitCard;
 import ru.clevertec.check.entity.discount.DiscountCard;
 import ru.clevertec.check.entity.product.ProductOrders;
 
-public class RequestOrderDTO {
+public class RequestOrderDto {
 
     private ProductOrders productOrders;
     private DiscountCard discountCard;
     private DebitCard debitCard;
 
-    public RequestOrderDTO() {
+    public RequestOrderDto() {
     }
 
-    public RequestOrderDTO(ProductOrders productOrders, DiscountCard discountCard, DebitCard debitCard) {
+    public RequestOrderDto(ProductOrders productOrders, DiscountCard discountCard, DebitCard debitCard) {
         this.productOrders = productOrders;
         this.discountCard = discountCard;
         this.debitCard = debitCard;

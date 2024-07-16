@@ -26,16 +26,6 @@ public class Check {
         this.userBalance = userBalance;
     }
 
-    private Check(CheckBuilder builder) {
-        this.discountCardNumber = builder.discountCardNumber;
-        this.discount = builder.discount;
-        this.totalPrice = builder.totalPrice;
-        this.totalDiscount = builder.totalDiscount;
-        this.totalWithDiscount = builder.totalWithDiscount;
-        this.productsInfo = builder.productsInfo;
-        this.userBalance = builder.userBalance;
-    }
-
     public String getDiscountCardNumber() {
         return discountCardNumber;
     }
@@ -62,6 +52,16 @@ public class Check {
 
     public List<ProductsPriceDiscountInfo> getProducts() {
         return productsInfo;
+    }
+
+    private Check(CheckBuilder builder) {
+        this.discountCardNumber = builder.discountCardNumber;
+        this.discount = builder.discount;
+        this.totalPrice = builder.totalPrice;
+        this.totalDiscount = builder.totalDiscount;
+        this.totalWithDiscount = builder.totalWithDiscount;
+        this.productsInfo = builder.productsInfo;
+        this.userBalance = builder.userBalance;
     }
 
     public static class CheckBuilder {
@@ -114,7 +114,7 @@ public class Check {
 
     @Override
     public String toString() {
-        return "Check{" +
+        return "CheckService{" +
                 "discountCardNumber='" + discountCardNumber + '\'' +
                 ", discount=" + discount +
                 ", totalPrice=" + totalPrice +

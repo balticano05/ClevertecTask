@@ -2,6 +2,7 @@ package ru.clevertec.check.repositories;
 
 import ru.clevertec.check.entity.discount.DiscountCard;
 import ru.clevertec.check.mappers.DataMapperToDiscountCardMapper;
+import ru.clevertec.check.utils.systemconsts.StringConst;
 import ru.clevertec.check.utils.validator.FormatFileDiscountCards;
 
 import java.io.IOException;
@@ -14,12 +15,12 @@ public class DiscountCardRep extends AbstractRepository<DiscountCard> {
 
     public void createRep() throws IOException {
 
-        super.createRep("src/main/resources/discountCards.csv", "DISCOUNT CARDS");
+        super.createRep(StringConst.PATH_TO_FILE_DISCOUNT_CARDS, "DISCOUNT CARDS");
     }
 
     public DiscountCard getDiscountCardByCardNumber(String cardNumber) {
 
-        if (cardNumber.equals("none")) {
+        if (cardNumber.equals(StringConst.NONE)) {
 
             return createDiscountCard(cardNumber, 0);
         }

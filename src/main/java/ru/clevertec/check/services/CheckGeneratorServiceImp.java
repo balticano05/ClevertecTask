@@ -1,14 +1,15 @@
 package ru.clevertec.check.services;
 
+import ru.clevertec.check.dto.ResponseParsedArgsDto;
 import ru.clevertec.check.mappers.ConverterCheckToDataMapper;
-import ru.clevertec.check.dto.RequestOrderDTO;
-import ru.clevertec.check.dto.ResponseParsedArgsDTO;
-import ru.clevertec.check.dto.ResponseResultDTO;
+import ru.clevertec.check.dto.RequestOrderDto;
+import ru.clevertec.check.dto.ResponseResultDto;
 import ru.clevertec.check.entity.check.Check;
 import ru.clevertec.check.entity.debit.DebitCard;
 import ru.clevertec.check.entity.discount.DiscountCard;
 import ru.clevertec.check.entity.product.ProductOrders;
 import ru.clevertec.check.utils.csv.FileWriterCSV;
+import ru.clevertec.check.utils.systemconsts.StringConst;
 import ru.clevertec.check.utils.validator.FormatArgs;
 
 import java.io.File;
@@ -30,39 +31,32 @@ public class CheckGeneratorServiceImp implements CheckGeneratorService {
     }
 
     public void generate(String args) {
-
         try {
-
             if (FormatArgs.isValid(args)) {
-
-                ResponseParsedArgsDTO responseParsedArgs = parseArguments(args);
-
+                ResponseParsedArgsDto responseParsedArgs = parseArguments(args);
                 String pathToFile = responseParsedArgs.getPathToFile();
                 String saveToFile = responseParsedArgs.getSaveToFile();
 
                 System.out.println(pathToFile + "\n" + saveToFile);
-
-                if (!"none".equals(pathToFile) && !"none".equals(saveToFile)) {
-
-                    processAndGenerateCheck(responseParsedArgs, saveToFile);
-                } else {
-
-                    handleMissingPathOrSaveFile(pathToFile, saveToFile);
-                }
+                handlePaths(pathToFile, saveToFile, responseParsedArgs);
             } else {
-
-                handleError("BAD REQUEST", "result.csv");
+                handleError(StringConst.BAD_REQUEST, StringConst.FILE_RESULT);
             }
         } catch (Exception e) {
-
-            handleErrorSafely("INTERNAL ERROR", "result.csv", e);
+            handleErrorSafely(StringConst.INTERNAL_ERROR, StringConst.FILE_RESULT, e);
         }
     }
 
-    private void processAndGenerateCheck(ResponseParsedArgsDTO responseParsedArgs, String saveToFile) throws IOException {
+    private void handlePaths(String pathToFile, String saveToFile, ResponseParsedArgsDto responseParsedArgs) throws IOException {
+        if (!StringConst.NONE.equals(pathToFile) && !StringConst.NONE.equals(saveToFile)) {
+            processAndGenerateCheck(responseParsedArgs, saveToFile);
+        } else {
+            handleMissingPathOrSaveFile(pathToFile, saveToFile);
+        }
+    }
 
+    private void processAndGenerateCheck(ResponseParsedArgsDto responseParsedArgs, String saveToFile) throws IOException {
         try {
-
             ProductOrders productOrders = processProducts(responseParsedArgs);
             printProducts(productOrders);
 
@@ -70,49 +64,38 @@ public class CheckGeneratorServiceImp implements CheckGeneratorService {
             System.out.println(discountCard);
 
             DebitCard debitCard = processDebitCard(responseParsedArgs);
-            RequestOrderDTO requestOrder = new RequestOrderDTO(productOrders, discountCard, debitCard);
+            RequestOrderDto requestOrder = new RequestOrderDto(productOrders, discountCard, debitCard);
 
             Check check = serviceGeneratingCheck.execute(requestOrder);
             handleCheckResult(check, debitCard, saveToFile);
 
         } catch (IOException e) {
-
-            handleError("INTERNAL ERROR", saveToFile);
+            handleError(StringConst.INTERNAL_ERROR, saveToFile);
         }
     }
 
     private void handleMissingPathOrSaveFile(String pathToFile, String saveToFile) throws IOException {
-
-        if ("none".equals(pathToFile)) {
-
-            handleError("BAD REQUEST", saveToFile.equals("none") ? "result.csv" : saveToFile);
-
-        } else if ("none".equals(saveToFile)) {
-
-            handleError("BAD REQUEST", "result.csv");
+        if (StringConst.NONE.equals(pathToFile)) {
+            handleError(StringConst.BAD_REQUEST, saveToFile.equals(StringConst.NONE) ? StringConst.FILE_RESULT : saveToFile);
+        } else if (StringConst.NONE.equals(saveToFile)) {
+            handleError(StringConst.BAD_REQUEST, StringConst.FILE_RESULT);
         }
     }
 
     private void handleErrorSafely(String errorMessage, String defaultFile, Exception e) {
-
         try {
-
             handleError(errorMessage, defaultFile);
-
         } catch (IOException ex) {
-
             e.printStackTrace();
             throw new RuntimeException(ex);
         }
     }
 
-    private ResponseParsedArgsDTO parseArguments(String args) throws IOException {
-
+    private ResponseParsedArgsDto parseArguments(String args) throws IOException {
         return serviceParserArgs.parseArgs(args);
     }
 
-    private ProductOrders processProducts(ResponseParsedArgsDTO responseParsedArgs) throws IOException {
-
+    private ProductOrders processProducts(ResponseParsedArgsDto responseParsedArgs) throws IOException {
         String pathToFile = responseParsedArgs.getPathToFile();
         File file = new File(pathToFile);
 
@@ -121,67 +104,50 @@ public class CheckGeneratorServiceImp implements CheckGeneratorService {
         }
 
         serviceProducts.takeOrders(responseParsedArgs.getPairs(), pathToFile);
-
         return serviceProducts.executeOrders();
     }
 
-    private DiscountCard processDiscountCard(ResponseParsedArgsDTO responseParsedArgs) throws IOException {
-
+    private DiscountCard processDiscountCard(ResponseParsedArgsDto responseParsedArgs) throws IOException {
         serviceDiscountCard.executeNumberDiscountCard(responseParsedArgs.getNumberDiscountCard());
-
         return serviceDiscountCard.getDiscountCards();
     }
 
-    private DebitCard processDebitCard(ResponseParsedArgsDTO responseParsedArgs) {
-
+    private DebitCard processDebitCard(ResponseParsedArgsDto responseParsedArgs) {
         DebitCard debitCard = new DebitCard(responseParsedArgs.getBalance());
-
         System.out.println(debitCard);
-
         return debitCard;
     }
 
     private void printProducts(ProductOrders productOrders) {
-
         for (var product : productOrders.getProducts()) {
-
             System.out.println(product);
         }
     }
 
     private void handleCheckResult(Check check, DebitCard debitCard, String saveToFile) throws IOException {
-
         ConverterCheckToDataMapper converter = new ConverterCheckToDataMapper();
         converter.convert(check);
 
-        ResponseResultDTO responseResultDTO;
+        ResponseResultDto responseResultDTO;
 
         if (check.getTotalWithDiscount() <= debitCard.getBalance()) {
-
-            responseResultDTO = new ResponseResultDTO(converter.getConvertedEntity());
-            printChek(converter.getConvertedEntity());
-
+            responseResultDTO = new ResponseResultDto(converter.getConvertedEntity());
+            printCheck(converter.getConvertedEntity());
             FileWriterCSV.writeInFile(responseResultDTO, saveToFile);
-
         } else {
-
-            responseResultDTO = new ResponseResultDTO(List.of("ERROR", "NOT ENOUGH MONEY"));
+            responseResultDTO = new ResponseResultDto(List.of(StringConst.ERROR, StringConst.NOT_ENOUGH_MONEY));
             FileWriterCSV.writeInFile(responseResultDTO, saveToFile);
-
-            System.out.println("BAD REQUEST.");
+            System.out.println(StringConst.BAD_REQUEST);
         }
     }
 
     private void handleError(String message, String pathToFile) throws IOException {
-
-        ResponseResultDTO responseResultDTO = new ResponseResultDTO(List.of("ERROR", message));
+        ResponseResultDto responseResultDTO = new ResponseResultDto(List.of(StringConst.ERROR, message));
         FileWriterCSV.writeInFile(responseResultDTO, pathToFile);
-
-        System.out.println("BAD REQUEST.");
+        System.out.println(StringConst.BAD_REQUEST);
     }
 
-    private void printChek(List<String> data) {
-
+    private void printCheck(List<String> data) {
         for (String el : data) {
             System.out.println(el);
         }

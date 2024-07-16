@@ -1,6 +1,6 @@
 package ru.clevertec.check.services;
 
-import ru.clevertec.check.dto.ResponseParsedArgsDTO;
+import ru.clevertec.check.dto.ResponseParsedArgsDto;
 import ru.clevertec.check.utils.systemconsts.PatternConst;
 
 import java.util.ArrayList;
@@ -10,9 +10,9 @@ import java.util.regex.Matcher;
 public class ServiceParserArgsServiceImpl implements ParserArgsService {
 
     @Override
-    public ResponseParsedArgsDTO parseArgs(String args) {
+    public ResponseParsedArgsDto parseArgs(String args) {
 
-        ResponseParsedArgsDTO responseParsedArgs = new ResponseParsedArgsDTO();
+        ResponseParsedArgsDto responseParsedArgs = new ResponseParsedArgsDto();
 
         responseParsedArgs.setPairs(parsePairs(args));
         responseParsedArgs.setNumberDiscountCard(parseDiscountCard(args));

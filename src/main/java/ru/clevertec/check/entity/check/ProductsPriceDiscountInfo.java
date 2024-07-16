@@ -20,14 +20,6 @@ public class ProductsPriceDiscountInfo {
         this.totalPrice = totalPrice;
     }
 
-    private ProductsPriceDiscountInfo(ProductsPriceDiscountInfoBuilder builder) {
-        this.quantity = builder.quantity;
-        this.description = builder.description;
-        this.price = builder.price;
-        this.discount = builder.discount;
-        this.totalPrice = builder.totalPrice;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -46,6 +38,14 @@ public class ProductsPriceDiscountInfo {
 
     public Double getDiscount() {
         return discount;
+    }
+
+    private ProductsPriceDiscountInfo(ProductsPriceDiscountInfoBuilder builder) {
+        this.quantity = builder.quantity;
+        this.description = builder.description;
+        this.price = builder.price;
+        this.discount = builder.discount;
+        this.totalPrice = builder.totalPrice;
     }
 
     public static class ProductsPriceDiscountInfoBuilder {

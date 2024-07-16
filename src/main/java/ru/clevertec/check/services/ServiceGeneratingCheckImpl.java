@@ -1,6 +1,6 @@
 package ru.clevertec.check.services;
 
-import ru.clevertec.check.dto.RequestOrderDTO;
+import ru.clevertec.check.dto.RequestOrderDto;
 import ru.clevertec.check.entity.product.ProductOrder;
 import ru.clevertec.check.entity.product.ProductOrders;
 import ru.clevertec.check.entity.check.Check;
@@ -10,12 +10,12 @@ import ru.clevertec.check.entity.discount.DiscountCard;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceGeneratingCheckImpl implements GeneratingCheckService<RequestOrderDTO, Check> {
+public class ServiceGeneratingCheckImpl implements GeneratingCheckService<RequestOrderDto, Check> {
 
     private Check check;
 
     @Override
-    public Check execute(RequestOrderDTO requestOrder) {
+    public Check execute(RequestOrderDto requestOrder) {
 
         List<ProductsPriceDiscountInfo> productInfo = generateInfo(requestOrder.getProductOrders(),
                 requestOrder.getDiscountCard().getDiscount());

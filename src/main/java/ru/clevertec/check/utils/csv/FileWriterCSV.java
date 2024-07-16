@@ -1,6 +1,6 @@
 package ru.clevertec.check.utils.csv;
 
-import ru.clevertec.check.dto.ResponseResultDTO;
+import ru.clevertec.check.dto.ResponseResultDto;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 public final class FileWriterCSV {
 
 
-    public static void writeInFile(ResponseResultDTO responseResult, String saveToFile) throws IOException {
+    public static void writeInFile(ResponseResultDto responseResult, String saveToFile) throws IOException {
 
         String filePath = saveToFile;
 

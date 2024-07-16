@@ -2,14 +2,14 @@ package ru.clevertec.check.dto;
 
 import java.util.List;
 
-public class ResponseResultDTO {
+public class ResponseResultDto {
 
     private List<String> data;
 
-    public ResponseResultDTO() {
+    public ResponseResultDto() {
     }
 
-    public ResponseResultDTO(List<String> data) {
+    public ResponseResultDto(List<String> data) {
         this.data = data;
     }
 

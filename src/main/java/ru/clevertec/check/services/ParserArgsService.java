@@ -1,9 +1,9 @@
 package ru.clevertec.check.services;
 
-import ru.clevertec.check.dto.ResponseParsedArgsDTO;
+import ru.clevertec.check.dto.ResponseParsedArgsDto;
 
 public interface ParserArgsService {
 
-    public ResponseParsedArgsDTO parseArgs(String args);
+    public ResponseParsedArgsDto parseArgs(String args);
 
 }
