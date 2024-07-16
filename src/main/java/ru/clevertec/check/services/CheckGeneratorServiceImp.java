@@ -1,4 +1,4 @@
-package ru.clevertec.check;
+package ru.clevertec.check.services;
 
 import ru.clevertec.check.mappers.ConverterCheckToDataMapper;
 import ru.clevertec.check.dto.RequestOrderDTO;
@@ -8,10 +8,6 @@ import ru.clevertec.check.entity.check.Check;
 import ru.clevertec.check.entity.debit.DebitCard;
 import ru.clevertec.check.entity.discount.DiscountCard;
 import ru.clevertec.check.entity.product.ProductOrders;
-import ru.clevertec.check.services.ServiceDiscountCardServiceImpl;
-import ru.clevertec.check.services.ServiceGeneratingCheckImpl;
-import ru.clevertec.check.services.ServiceParserArgsServiceImpl;
-import ru.clevertec.check.services.ServiceProductsServiceImpl;
 import ru.clevertec.check.utils.csv.FileWriterCSV;
 import ru.clevertec.check.utils.validator.FormatArgs;
 
@@ -19,14 +15,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class SystemCheckGenerator {
+public class CheckGeneratorServiceImp implements CheckGeneratorService {
 
     private final ServiceGeneratingCheckImpl serviceGeneratingCheck;
     private final ServiceParserArgsServiceImpl serviceParserArgs;
     private final ServiceProductsServiceImpl serviceProducts;
     private final ServiceDiscountCardServiceImpl serviceDiscountCard;
 
-    public SystemCheckGenerator() {
+    public CheckGeneratorServiceImp() {
         this.serviceGeneratingCheck = new ServiceGeneratingCheckImpl();
         this.serviceParserArgs = new ServiceParserArgsServiceImpl();
         this.serviceProducts = new ServiceProductsServiceImpl();

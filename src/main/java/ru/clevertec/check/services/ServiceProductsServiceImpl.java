@@ -26,8 +26,6 @@ public class ServiceProductsServiceImpl implements ProductsService {
 
         ProductOrders productsOrders = new ProductOrders();
 
-        if (productOrderList.size() > 0) {
-
             for (ProductOrder productOrder : productOrderList) {
 
                 if (!(productOrder.getProduct().getQuantity() >= productOrder.getQuantity())) {
@@ -36,8 +34,6 @@ public class ServiceProductsServiceImpl implements ProductsService {
 
                 }
             }
-        }
-
         productsOrders.setProducts(this.productOrderList);
 
         return productsOrders;
